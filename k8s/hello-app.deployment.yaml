@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dummy-http-server
+  labels:
+    app: python-flask
+    tier: backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: python-flask
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: python-flask
+        tier: backend
+    spec:
+      containers:
+      - name: main
+        image: malajski/simple-webapp:latest
+        ports:
+        - containerPort: 80

@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dummy-http-client
+  labels:
+    app: curl
+    tier: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: curl
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: curl
+        tier: frontend
+    spec:
+      containers:
+      - name: main
+        image: malajski/simple-curl
+        env:
+         - name: TARGET_ENDPOINT_URL
+           value: dummy-http-server-service:8080/api/v1/hello
